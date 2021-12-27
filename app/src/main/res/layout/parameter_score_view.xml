@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="5dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/tvParameterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Parameter Name"
+                android:textSize="13sp"
+                android:textColor="@color/purple_500"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvSubParameterName"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="CUSTOMER SERVICE ESSENTIALS"
+                    android:textSize="11sp"
+                    android:textColor="#000"/>
+
+                <TextView
+                    android:id="@+id/tvParameterScore"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="60dp"
+                    android:text="5"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textColor="#000"/>
+
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:id="@+id/relativeLayoutAlertScoreGreen"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="60dp">
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:indeterminateOnly="false"
+                        android:progressDrawable="@drawable/circle_green" />
+
+                    <TextView
+                        android:id="@+id/tvParameterScorePer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="100%"
+                        android:textColor="#000"
+                        android:textSize="11sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:id="@+id/relativeLayoutAlertScoreRed"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="60dp">
+
+                    <ProgressBar
+                        android:id="@+id/progress_barRed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:indeterminateOnly="false"
+                        android:progressDrawable="@drawable/circle_green" />
+
+                    <TextView
+                        android:id="@+id/tvParameterScorePerRed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="100%"
+                        android:textColor="#000"
+                        android:textSize="11sp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

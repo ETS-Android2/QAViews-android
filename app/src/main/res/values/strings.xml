@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">QA Views</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="notification">Notification</string>
+    <string name="write_here">Write Plan of Action</string>
+    <string name="write_here_rebuttal">Write Rebuttal Action</string>
+    <string name="save">Save</string>
+</resources>
