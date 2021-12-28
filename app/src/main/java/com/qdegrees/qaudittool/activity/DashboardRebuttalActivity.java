@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qdegrees.qaudittool.R;
+import com.qdegrees.qaudittool.common.SharedPrefManager;
 
 public class DashboardRebuttalActivity extends AppCompatActivity {
 
@@ -149,7 +151,23 @@ public class DashboardRebuttalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_logout:
-                Toast.makeText(mActivity, "Click Logout", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alert = new AlertDialog.Builder(mActivity);
+                alert.setMessage("Are you sure?")
+                        .setPositiveButton("Logout", new DialogInterface.OnClickListener()                 {
+
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Intent intent = new Intent(mActivity, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                SharedPrefManager.getInstance(mActivity).logout();
+                                finish();
+
+                            }
+                        }).setNegativeButton("Cancel", null);
+
+                AlertDialog alert1 = alert.create();
+                alert1.show();
                 return true;
 
             case R.id.action_notification:

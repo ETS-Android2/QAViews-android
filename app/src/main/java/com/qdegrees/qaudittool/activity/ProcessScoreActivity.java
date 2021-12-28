@@ -312,32 +312,15 @@ public class ProcessScoreActivity extends AppCompatActivity implements View.OnCl
 
 
         if (v == tvPlanOfAction1) {
-            startActivity(new Intent(mActivity, PlanOfActionActivity.class));
+            Intent intent = new Intent(mActivity, PlanOfActionActivity.class);
+            intent.putExtra("valueCheck","POA");
+            startActivity(intent);
         }
 
         if (v == tvRaiseRebuttal1){
-            if (clickRebuttal1 == 0) {
-                clickRebuttal1++;
-                //clickAck1 = 0;
-                edtRebuttalRemark1.setVisibility(View.VISIBLE);
-            }else {
-                String sTempText = edtRebuttalRemark1.getText().toString();
-
-                if (sTempText.isEmpty()) {
-                    Toast.makeText(mActivity, "Please Fill Rebuttal Remark", Toast.LENGTH_SHORT).show();
-                }else {
-                    progressDialog.show();
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressDialog.dismiss();
-                            startActivity(new Intent(mActivity, DashboardRebuttalActivity.class));
-                        }
-                    },3000);
-                }
-
-            }
+            Intent intent = new Intent(mActivity, PlanOfActionActivity.class);
+            intent.putExtra("valueCheck","Rebuttal");
+            startActivity(intent);
         }
 
         if (v == tvAcceptFeedback1) {

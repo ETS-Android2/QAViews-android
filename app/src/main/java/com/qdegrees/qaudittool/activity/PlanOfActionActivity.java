@@ -2,6 +2,7 @@ package com.qdegrees.qaudittool.activity;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
@@ -10,6 +11,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -29,6 +31,8 @@ public class PlanOfActionActivity extends AppCompatActivity implements View.OnCl
     TextInputLayout remarkLayout1,remarkLayout2,remarkLayout23,remarkLayout13;
     ProgressBar progressBar85,ProgressBar855,ProgressBar8553,progressBar8533;
     String sCheckValue;
+    Button btnSave1,btnSave11;
+    CardView cvRecordAudio1,cvRecordAudio11;
 
     Activity mActivity;
 
@@ -40,6 +44,12 @@ public class PlanOfActionActivity extends AppCompatActivity implements View.OnCl
         mActivity = this;
 
         sCheckValue = getIntent().getStringExtra("valueCheck");
+
+        btnSave1 = findViewById(R.id.btnSave1);
+        cvRecordAudio1 = findViewById(R.id.cvRecordAudio1);
+
+        btnSave11 = findViewById(R.id.btnSave11);
+        cvRecordAudio11 = findViewById(R.id.cvRecordAudio11);
 
         linearLayoutOverAllPOA = findViewById(R.id.linearLayoutOverAllPOA);
 
@@ -106,8 +116,12 @@ public class PlanOfActionActivity extends AppCompatActivity implements View.OnCl
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (checkBox23.isChecked()) {
                     remarkLayout23.setVisibility(View.VISIBLE);
+                    btnSave11.setVisibility(View.VISIBLE);
+                    cvRecordAudio11.setVisibility(View.VISIBLE);
                 }else {
                     remarkLayout23.setVisibility(View.GONE);
+                    btnSave11.setVisibility(View.GONE);
+                    cvRecordAudio11.setVisibility(View.GONE);
                 }
             }
         });
@@ -123,8 +137,12 @@ public class PlanOfActionActivity extends AppCompatActivity implements View.OnCl
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (checkBox13.isChecked()) {
                     remarkLayout13.setVisibility(View.VISIBLE);
+                    btnSave1.setVisibility(View.VISIBLE);
+                    cvRecordAudio1.setVisibility(View.VISIBLE);
                 }else {
                     remarkLayout13.setVisibility(View.GONE);
+                    btnSave1.setVisibility(View.GONE);
+                    cvRecordAudio1.setVisibility(View.GONE);
                 }
             }
         });

@@ -54,6 +54,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
     // For Server Data
     String[] saAuditId,saAgentFeedback,saAgentFeedbackRecording,saAgentFeedbackEmail,saCritical;
+    int position=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,16 +124,25 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
         if (view == tvPlanOfAction) {
 
-            Intent intent = new Intent(mActivity, PlanOfActionActivity.class);
-            intent.putExtra("valueCheck","POA");
-            startActivity(intent);
+            if (saCritical[position].equals("0")) {
+                Toast.makeText(mActivity, "No Need Plan of Action", Toast.LENGTH_SHORT).show();
+            }else {
+                Intent intent = new Intent(mActivity, PlanOfActionActivity.class);
+                intent.putExtra("valueCheck","POA");
+                startActivity(intent);
+            }
         }
 
         if (view == tvRaiseRebuttal){
 
-            Intent intent = new Intent(mActivity, PlanOfActionActivity.class);
-            intent.putExtra("valueCheck","Rebuttal");
-            startActivity(intent);
+
+            if (saCritical[position].equals("0")) {
+                Toast.makeText(mActivity, "No Need Raise Rebuttal", Toast.LENGTH_SHORT).show();
+            }else {
+                Intent intent = new Intent(mActivity, PlanOfActionActivity.class);
+                intent.putExtra("valueCheck","Rebuttal");
+                startActivity(intent);
+            }
 
         }
 
@@ -170,7 +180,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                                         }else {
                                             //tvSwipeGesture.setText("Swiped Up");
                                             Intent intent = new Intent(mActivity, ProcessScoreActivity.class);
-                                            intent.putExtra("sAuditId",saAuditId[0]);
+                                            intent.putExtra("sAuditId",saAuditId[position]);
                                             startActivity(intent);
                                         }
                                         return true;
@@ -223,9 +233,30 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                                     if (Math.abs(xDiff) > threshold && Math.abs(velocityX) > velocity_threshold) {
 
                                         if (xDiff > 0) {
-                                            Toast.makeText(mActivity, "Swiped Right", Toast.LENGTH_SHORT).show();
+
+
+                                            position--;
+
+                                            if (position > -1) {
+                                                tvAgentFeedbackEmail.setText("From " + saAgentFeedbackEmail[position]);
+                                                tvAgentFeedbackText.setText(saAgentFeedback[position]);
+                                            }else {
+                                                Toast.makeText(mActivity, "This is First Notification", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            //Toast.makeText(mActivity, "Swiped Right", Toast.LENGTH_SHORT).show();
                                         }else {
-                                            Toast.makeText(mActivity, "Swiped Left", Toast.LENGTH_SHORT).show();
+
+                                            position++;
+
+                                            if (position < saAgentFeedback.length+1) {
+                                                tvAgentFeedbackEmail.setText("From " + saAgentFeedbackEmail[position]);
+                                                tvAgentFeedbackText.setText(saAgentFeedback[position]);
+                                            }else {
+                                                Toast.makeText(mActivity, "This is last Notification", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            //Toast.makeText(mActivity, "Swiped Left", Toast.LENGTH_SHORT).show();
                                         }
                                         return true;
                                     }
@@ -281,6 +312,8 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                                     startActivity(new Intent(mActivity, DashboardRebuttalActivity.class));
                                 }else {
 
+                                    position = 0;
+
                                     saAuditId = new String[array1.length()];
                                     saAgentFeedback = new String[array1.length()];
                                     saAgentFeedbackRecording = new String[array1.length()];
@@ -292,12 +325,12 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
                                         saAuditId[i] = data.getString("audit_id");
                                         saAgentFeedback[i] = data.getString("agent_feedback");
-                                        saAgentFeedbackRecording[i] = data.getString("agent_feedback");
+                                        saAgentFeedbackRecording[i] = data.getString("feedback_to_agent_recording");
                                         saAgentFeedbackEmail[i] = data.getString("auditor_email");
                                         saCritical[i] = data.getString("is_critical");
 
-                                        tvAgentFeedbackEmail.setText("From " + saAgentFeedbackEmail[0]);
-                                        tvAgentFeedbackText.setText(saAgentFeedback[0]);
+                                        tvAgentFeedbackEmail.setText("From " + saAgentFeedbackEmail[position]);
+                                        tvAgentFeedbackText.setText(saAgentFeedback[position]);
 
                                     }
 
@@ -310,7 +343,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(mActivity, e.toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(mActivity, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {
