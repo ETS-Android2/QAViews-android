@@ -11,10 +11,14 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
+import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import com.qdegrees.qaudittool.R;
 import com.qdegrees.qaudittool.common.RequestHandler;
 import com.qdegrees.qaudittool.common.SharedPrefManager;
@@ -34,6 +39,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,16 +51,21 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
     Activity mActivity;
     ImageView gifShowSwipeUp,gifShowSwipeRight;
 
-    ProgressBar progress_bar150New,progress_bar150Ne;
+    ProgressBar progress_barFatalScore,progress_bar150Ne;
 
     EditText edtRebuttalRemark;
-    TextView tvRaiseRebuttal,tvPlanOfAction,tvAcceptFeedback,tvAgentFeedbackEmail,tvAgentFeedbackText;
+    TextView tvRaiseRebuttal,tvPlanOfAction,tvAcceptFeedback,tvAgentFeedbackEmail,tvAgentFeedbackText,
+            tvCallIDServer,tvProcessNameServer,tvCusNameServer,tvCusNumberServer,tvWithoutFatalScore;
     ProgressDialog progressDialog;
 
 
     // For Server Data
-    String[] saAuditId,saAgentFeedback,saAgentFeedbackRecording,saAgentFeedbackEmail,saCritical;
+    String[] saAuditId,saAgentFeedback,saAgentFeedbackRecording,saAgentFeedbackEmail,saCritical,
+    saCallId,saProcessName,saCusName,saCusNumber,saWithoutFatalScore;
     int position=0;
+
+    private Animation leftToRight,rightToLeft;
+    RelativeLayout relativeLayoutNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,15 +78,26 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCancelable(false);
 
+        tvCallIDServer = findViewById(R.id.tvCallIDServer);
+        tvProcessNameServer = findViewById(R.id.tvProcessNameServer);
+        tvCusNameServer = findViewById(R.id.tvCusNameServer);
+        tvCusNumberServer = findViewById(R.id.tvCusNumberServer);
+        tvWithoutFatalScore = findViewById(R.id.tvWithoutFatalScore);
+
         linearLayoutForSwipeView = findViewById(R.id.linearLayoutForSwipeView);
         linearLayoutForSwipeViewRight = findViewById(R.id.linearLayoutForSwipeViewRight);
 
-        /*progress_bar150New = findViewById(R.id.progress_bar150New);
-        progress_bar150New.setProgress((int) 85.55);
+        relativeLayoutNotification = findViewById(R.id.relativeLayoutNotification);
 
-        progress_bar150Ne = findViewById(R.id.progress_bar150Ne);
+        leftToRight = AnimationUtils.loadAnimation(mActivity,R.anim.lefttoright);
+
+        rightToLeft = AnimationUtils.loadAnimation(mActivity,R.anim.righttoleft);
+
+        progress_barFatalScore = findViewById(R.id.progress_barFatalScore);
+        //progress_bar150New.setProgress((int) 85.55);
+
+        /*progress_bar150Ne = findViewById(R.id.progress_bar150Ne);
         progress_bar150Ne.setProgress(85);*/
-
 
         swipeListener = new SwipeListener(linearLayoutForSwipeView);
 
@@ -95,8 +117,8 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         tvAgentFeedbackEmail = findViewById(R.id.tvAgentFeedbackEmail);
         tvAgentFeedbackText = findViewById(R.id.tvAgentFeedbackText);
 
-        gifShowSwipeUp = findViewById(R.id.gifShowSwipeUp);
-        Glide.with(mActivity).load(R.drawable.swipe_up).into(gifShowSwipeUp);
+        /*gifShowSwipeUp = findViewById(R.id.gifShowSwipeUp);
+        Glide.with(mActivity).load(R.drawable.swipe_up).into(gifShowSwipeUp);*/
 
         gifShowSwipeRight = findViewById(R.id.gifShowSwipeRight);
         Glide.with(mActivity).load(R.drawable.right_swipe).into(gifShowSwipeRight);
@@ -181,6 +203,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                                             //tvSwipeGesture.setText("Swiped Up");
                                             Intent intent = new Intent(mActivity, ProcessScoreActivity.class);
                                             intent.putExtra("sAuditId",saAuditId[position]);
+                                            intent.putExtra("sWithoutFatalScore",saWithoutFatalScore[position]);
                                             startActivity(intent);
                                         }
                                         return true;
@@ -238,8 +261,25 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                                             position--;
 
                                             if (position > -1) {
+
+
+                                                leftToRight = AnimationUtils.loadAnimation(mActivity,R.anim.lefttoright);
+                                                relativeLayoutNotification.setAnimation(leftToRight);
+
                                                 tvAgentFeedbackEmail.setText("From " + saAgentFeedbackEmail[position]);
                                                 tvAgentFeedbackText.setText(saAgentFeedback[position]);
+
+                                                tvCallIDServer.setText(saCallId[position]);
+                                                tvProcessNameServer.setText(saProcessName[position]);
+                                                tvCusNameServer.setText(saCusName[position]);
+                                                tvCusNumberServer.setText(saCusNumber[position]);
+
+                                                float valueInint = Float.valueOf(saWithoutFatalScore[position]);
+
+                                                progress_barFatalScore.setProgress((int) valueInint);
+                                                tvWithoutFatalScore.setText(saWithoutFatalScore[position] + "%");
+
+
                                             }else {
                                                 Toast.makeText(mActivity, "This is First Notification", Toast.LENGTH_SHORT).show();
                                             }
@@ -249,9 +289,23 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
                                             position++;
 
-                                            if (position < saAgentFeedback.length+1) {
+                                            if (position < saAgentFeedback.length) {
+
+                                                rightToLeft = AnimationUtils.loadAnimation(mActivity,R.anim.righttoleft);
+                                                relativeLayoutNotification.setAnimation(rightToLeft);
+
                                                 tvAgentFeedbackEmail.setText("From " + saAgentFeedbackEmail[position]);
                                                 tvAgentFeedbackText.setText(saAgentFeedback[position]);
+
+                                                tvCallIDServer.setText(saCallId[position]);
+                                                tvProcessNameServer.setText(saProcessName[position]);
+                                                tvCusNameServer.setText(saCusName[position]);
+                                                tvCusNumberServer.setText(saCusNumber[position]);
+
+                                                float valueInint = Float.valueOf(saWithoutFatalScore[position]);
+
+                                                progress_barFatalScore.setProgress((int) valueInint);
+                                                tvWithoutFatalScore.setText(saWithoutFatalScore[position] + "%");
                                             }else {
                                                 Toast.makeText(mActivity, "This is last Notification", Toast.LENGTH_SHORT).show();
                                             }
@@ -320,6 +374,12 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                                     saAgentFeedbackEmail = new String[array1.length()];
                                     saCritical = new String[array1.length()];
 
+                                    saCallId = new String[array1.length()];
+                                    saProcessName = new String[array1.length()];
+                                    saCusName = new String[array1.length()];
+                                    saCusNumber = new String[array1.length()];
+                                    saWithoutFatalScore = new String[array1.length()];
+
                                     for (int i=0; i<array1.length(); i++) {
                                         JSONObject data = array1.getJSONObject(i);
 
@@ -329,8 +389,24 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                                         saAgentFeedbackEmail[i] = data.getString("auditor_email");
                                         saCritical[i] = data.getString("is_critical");
 
+                                        saCallId[i] = data.getString("call_id");
+                                        saProcessName[i] = data.getString("process_name");
+                                        saCusName[i] = data.getString("customer_name");
+                                        saCusNumber[i] = data.getString("phone_number");
+                                        saWithoutFatalScore[i] = data.getString("without_fatal");
+
                                         tvAgentFeedbackEmail.setText("From " + saAgentFeedbackEmail[position]);
                                         tvAgentFeedbackText.setText(saAgentFeedback[position]);
+
+                                        tvCallIDServer.setText(saCallId[position]);
+                                        tvProcessNameServer.setText(saProcessName[position]);
+                                        tvCusNameServer.setText(saCusName[position]);
+                                        tvCusNumberServer.setText(saCusNumber[position]);
+
+                                        float valueInint = Float.valueOf(saWithoutFatalScore[position]);
+
+                                        progress_barFatalScore.setProgress((int) valueInint);
+                                        tvWithoutFatalScore.setText(saWithoutFatalScore[position] + "%");
 
                                     }
 

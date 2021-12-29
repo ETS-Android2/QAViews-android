@@ -61,7 +61,7 @@ public class ProcessScoreActivity extends AppCompatActivity implements View.OnCl
     SwipeListener swipeListener;
 
     LinearLayout linearLayout1,linearLayout2,linearLayout3,linearLayout4,linearLayout5,linearLayout6;
-    TextView tvAllScore;
+    TextView tvAllScore,tvWithoutFatalScoreParameter;
 
     Activity mActivity;
     boolean isPass = false;
@@ -75,7 +75,7 @@ public class ProcessScoreActivity extends AppCompatActivity implements View.OnCl
     ProgressDialog progressDialog;
 
     RecyclerView recyclerViewParameterWiseScore;
-    String sAuditId;
+    String sAuditId,sWithoutFatalScore;
     String[] saParameterName,saSubParameterName,saFailType,saFailReason,saRemark,saScoreWithFatalPer,saScore,saIsCritical;
 
     @Override
@@ -91,6 +91,7 @@ public class ProcessScoreActivity extends AppCompatActivity implements View.OnCl
         progressDialog.setCancelable(false);
 
         sAuditId = getIntent().getStringExtra("sAuditId");
+        sWithoutFatalScore = getIntent().getStringExtra("sWithoutFatalScore");
 
         edtRebuttalRemark1 = findViewById(R.id.edtRebuttalRemark1);
 
@@ -109,7 +110,12 @@ public class ProcessScoreActivity extends AppCompatActivity implements View.OnCl
         swipeListener = new SwipeListener(linearLayoutForDownWord);
 
         progress_bar2 = findViewById(R.id.progress_bar2);
-        progress_bar2.setProgress(75);
+        float valueInint = Float.valueOf(sWithoutFatalScore);
+        progress_bar2.setProgress((int) valueInint);
+
+
+        tvWithoutFatalScoreParameter = findViewById(R.id.tvWithoutFatalScoreParameter);
+        tvWithoutFatalScoreParameter.setText(sWithoutFatalScore + "%");
 
         progressBarRed = findViewById(R.id.progressBarRed);
         progressBarRed.setProgress(20);

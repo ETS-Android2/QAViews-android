@@ -99,6 +99,7 @@
                             android:progressDrawable="@drawable/circle_green" />
 
                         <TextView
+                            android:id="@+id/tvWithoutFatalScoreParameter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
