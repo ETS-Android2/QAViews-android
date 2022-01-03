@@ -22,6 +22,17 @@ public class AuditFormActivity extends AppCompatActivity implements View.OnClick
     ImageView ivShowMoreView,ivShowLessView;
     LinearLayout linearLayoutLessView,linearLayoutMoreView,linearDetailsAuditIDField;
 
+    ImageView ivShowMoreViewAuditBasic,ivShowLessViewAuditBasic;
+    LinearLayout linearLayoutLessViewAuditBasic,linearLayoutMoreViewAuditBasic,linearLayoutAuditBasicDetails;
+
+    ImageView ivShowMoreViewAuditQRC,ivShowLessViewAuditQRC;
+    LinearLayout linearLayoutLessViewAuditQRC,linearLayoutMoreViewAuditQRC,linearLayoutAuditQRCDetails;
+
+    ImageView ivShowMoreViewAuditCall,ivShowLessViewAuditCall;
+    LinearLayout linearLayoutLessViewAuditCall,linearLayoutMoreViewAuditCall,linearLayoutAuditCallDetails;
+
+
+
     AutoCompleteTextView atvObservation,atvObservation1;
     ImageView ivAllTheBest,ivBadLuck,ivAllTheBest1,ivBadLuck1;
     Activity mActivity;
@@ -36,6 +47,41 @@ public class AuditFormActivity extends AppCompatActivity implements View.OnClick
 
         setTitle("Audit Form");
         mActivity = this;
+
+
+
+
+        ivShowLessViewAuditCall = findViewById(R.id.ivShowLessViewAuditCall);
+        ivShowLessViewAuditCall.setOnClickListener(this::onClick);
+
+        ivShowMoreViewAuditCall = findViewById(R.id.ivShowMoreViewAuditCall);
+        ivShowMoreViewAuditCall.setOnClickListener(this::onClick);
+
+        linearLayoutLessViewAuditCall = findViewById(R.id.linearLayoutLessViewAuditCall);
+        linearLayoutMoreViewAuditCall = findViewById(R.id.linearLayoutMoreViewAuditCall);
+        linearLayoutAuditQRCDetails = findViewById(R.id.linearLayoutAuditQRCDetails);
+
+        ivShowLessViewAuditQRC = findViewById(R.id.ivShowLessViewAuditQRC);
+        ivShowLessViewAuditQRC.setOnClickListener(this::onClick);
+
+        ivShowMoreViewAuditQRC = findViewById(R.id.ivShowMoreViewAuditQRC);
+        ivShowMoreViewAuditQRC.setOnClickListener(this::onClick);
+
+        linearLayoutLessViewAuditQRC = findViewById(R.id.linearLayoutLessViewAuditQRC);
+        linearLayoutMoreViewAuditQRC = findViewById(R.id.linearLayoutMoreViewAuditQRC);
+        linearLayoutAuditCallDetails = findViewById(R.id.linearLayoutAuditCallDetails);
+
+
+        ivShowLessViewAuditBasic = findViewById(R.id.ivShowLessViewAuditBasic);
+        ivShowLessViewAuditBasic.setOnClickListener(this::onClick);
+
+        ivShowMoreViewAuditBasic = findViewById(R.id.ivShowMoreViewAuditBasic);
+        ivShowMoreViewAuditBasic.setOnClickListener(this::onClick);
+
+
+        linearLayoutLessViewAuditBasic = findViewById(R.id.linearLayoutLessViewAuditBasic);
+        linearLayoutMoreViewAuditBasic = findViewById(R.id.linearLayoutMoreViewAuditBasic);
+        linearLayoutAuditBasicDetails = findViewById(R.id.linearLayoutAuditBasicDetails);
 
 
         ivShowLessView = findViewById(R.id.ivShowLessView);
@@ -126,11 +172,6 @@ public class AuditFormActivity extends AppCompatActivity implements View.OnClick
 
 
 
-
-
-
-
-
         ivExpandView = findViewById(R.id.ivExpandView);
         ivExpandView.setOnClickListener(this::onClick);
 
@@ -145,6 +186,46 @@ public class AuditFormActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
+
+        if (view == ivShowLessViewAuditCall) {
+            linearLayoutAuditCallDetails.setVisibility(View.GONE);
+            linearLayoutLessViewAuditCall.setVisibility(View.GONE);
+            linearLayoutMoreViewAuditCall.setVisibility(View.VISIBLE);
+
+        }
+
+        if (view == ivShowMoreViewAuditCall) {
+            linearLayoutAuditCallDetails.setVisibility(View.VISIBLE);
+            linearLayoutLessViewAuditCall.setVisibility(View.VISIBLE);
+            linearLayoutMoreViewAuditCall.setVisibility(View.GONE);
+        }
+
+        if (view == ivShowLessViewAuditQRC) {
+            linearLayoutAuditQRCDetails.setVisibility(View.GONE);
+            linearLayoutLessViewAuditQRC.setVisibility(View.GONE);
+            linearLayoutMoreViewAuditQRC.setVisibility(View.VISIBLE);
+
+        }
+
+        if (view == ivShowMoreViewAuditQRC) {
+            linearLayoutAuditQRCDetails.setVisibility(View.VISIBLE);
+            linearLayoutLessViewAuditQRC.setVisibility(View.VISIBLE);
+            linearLayoutMoreViewAuditQRC.setVisibility(View.GONE);
+        }
+
+        if (view == ivShowLessViewAuditBasic) {
+            linearLayoutAuditBasicDetails.setVisibility(View.GONE);
+            linearLayoutLessViewAuditBasic.setVisibility(View.GONE);
+            linearLayoutMoreViewAuditBasic.setVisibility(View.VISIBLE);
+
+        }
+
+
+        if (view == ivShowMoreViewAuditBasic) {
+            linearLayoutAuditBasicDetails.setVisibility(View.VISIBLE);
+            linearLayoutLessViewAuditBasic.setVisibility(View.VISIBLE);
+            linearLayoutMoreViewAuditBasic.setVisibility(View.GONE);
+        }
 
         if (view == ivShowLessView) {
             linearDetailsAuditIDField.setVisibility(View.GONE);
