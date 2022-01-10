@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     EditText edtEmail,edtPassword;
     Button btnLogin;
-    String sEmail,sPassword;
+    String sEmail,sPassword,sSaveUserRole;
     ProgressDialog progressDialog;
 
     @Override
@@ -47,7 +47,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().hide();
         mActivity = this;
 
-        if (SharedPrefManager.getInstance(mActivity).isLoggedIn()) {
+        /*sSaveUserRole = SharedPrefManager.getInstance(mActivity).getUserRole();
+
+        if (sSaveUserRole.equals("partner-admin")) {
+            startActivity(new Intent(mActivity, FeedbackActivity.class));
+            finish();
+        }else if (sSaveUserRole.equals("qa")) {
+            startActivity(new Intent(mActivity, MainMenuActivity.class));
+            finish();
+        }else {
+            startActivity(new Intent(mActivity, AudioFilterActivity.class));
+            finish();
+        }*/
+
+
+        /*if (SharedPrefManager.getInstance(mActivity).isLoggedIn()) {
             if (SharedPrefManager.getInstance(mActivity).getUserEmail().equals("sb@qdegrees.com")) {
                 startActivity(new Intent(mActivity, FeedbackActivity.class));
                 finish();
@@ -58,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(mActivity, AudioFilterActivity.class));
                 finish();
             }
-        }
+        }*/
 
         progressDialog = new ProgressDialog(mActivity);
         progressDialog.setCancelable(false);
@@ -92,7 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(mActivity, "Please Fill Valid Email Address", Toast.LENGTH_SHORT).show();
             }else if (sPassword.isEmpty()) {
                 Toast.makeText(mActivity, "Please Fill Password", Toast.LENGTH_SHORT).show();
-            }else {
+            }/*else {
 
                 if(sEmail.equals("Digvijay.singh@qdegrees.com")) {
 
@@ -101,13 +115,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     String sEmail = "Digvijay.singh@qdegrees.com";
                     String sUserId = "1621";
 
-                    SharedPrefManager.getInstance(mActivity).userLogin(sUserId,sName,sEmail,sAuthKey);
+                    //SharedPrefManager.getInstance(mActivity).userLogin(sUserId,sName,sEmail,sAuthKey);
 
                     startActivity(new Intent(mActivity, MainMenuActivity.class));
                     finish();
-                }else {
+                }*/else {
                     userLogin();
-                }
             }
 
         }
@@ -140,11 +153,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 String sAuthKey = jsonObject.getString("auth_key");
                                 String sEmail = jsonObject.getString("email");
                                 String sUserId = jsonObject.getString("user_id");
+                                String sUserRole = jsonObject.getString("role");
 
-                                SharedPrefManager.getInstance(mActivity).userLogin(sUserId,sName,sEmail,sAuthKey);
+                                SharedPrefManager.getInstance(mActivity).userLogin(sUserId,sName,sEmail,sAuthKey,sUserRole);
 
-                                if (sEmail.equals("sb@qdegrees.com")) {
+                                if (sUserRole.equals("partner-admin")) {
                                     startActivity(new Intent(mActivity, FeedbackActivity.class));
+                                    finish();
+                                }else if (sUserRole.equals("qa")) {
+                                    startActivity(new Intent(mActivity, MainMenuActivity.class));
                                     finish();
                                 }else {
                                     startActivity(new Intent(mActivity, AudioFilterActivity.class));

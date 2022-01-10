@@ -12,6 +12,7 @@ public class SharedPrefManager {
     private static final String KEY_USER_NAME = "userName";
     private static final String KEY_USER_EMAIL = "userEmail";
     private static final String KEY_AUTH_KEY = "user_auth_key";
+    private static final String KEY_USER_ROLE = "user_role";
 
 
     private static SharedPrefManager mInstance;
@@ -31,13 +32,14 @@ public class SharedPrefManager {
     //method to let the user login
     //this method will store the user data in shared preferences
     public void userLogin(String sUserId, String sName,
-                          String sEmail, String sAuthKey) {
+                          String sEmail, String sAuthKey, String sUserRole) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_USER_ID, sUserId);
         editor.putString(KEY_USER_NAME, sName);
         editor.putString(KEY_USER_EMAIL, sEmail);
         editor.putString(KEY_AUTH_KEY, sAuthKey);
+        editor.putString(KEY_USER_ROLE, sUserRole);
         editor.apply();
     }
 
@@ -51,6 +53,7 @@ public class SharedPrefManager {
         editor.remove(KEY_USER_NAME);
         editor.remove(KEY_USER_EMAIL);
         editor.remove(KEY_AUTH_KEY);
+        editor.remove(KEY_USER_ROLE);
         editor.clear();
         editor.apply();
     }
@@ -79,6 +82,11 @@ public class SharedPrefManager {
     public String getUserAuthKey() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_AUTH_KEY, "null");
+    }
+
+    public String getUserRole() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_USER_ROLE, "null");
     }
 
 

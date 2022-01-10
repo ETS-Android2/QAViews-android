@@ -38,7 +38,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     Activity mActivity;
 
     ImageView ivHome,ivAudit,ivMenu;
-    TextView tvHighlight1,tvHighlight2,tvHighlight3,tvCallListening;
+    TextView tvHighlight1,tvHighlight2,tvHighlight3;
 
     AutoCompleteTextView atvSelectProcess,atvSelectDateRange,atvSelectAgentName;
     LinearLayout linearLayoutHomeView,linearLayoutAuditForm,linearLayoutMenu;
@@ -98,14 +98,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         linearLayoutHomeView = findViewById(R.id.linearLayoutHomeView);
         linearLayoutAuditForm = findViewById(R.id.linearLayoutAuditForm);
         linearLayoutMenu = findViewById(R.id.linearLayoutMenu);
-
-        tvCallListening = findViewById(R.id.tvCallListening);
-        tvCallListening.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mActivity, PlayAudioFileActivity.class));
-            }
-        });
 
     }
 

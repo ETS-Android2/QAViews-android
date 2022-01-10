@@ -16,7 +16,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/linearLayoutHomeView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -476,7 +476,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayoutMenu"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -564,16 +564,6 @@
                             android:textSize="15sp"
                             android:textColor="#000"
                             android:drawableStart="@drawable/ic_baseline_assignment_24_black"/>
-
-                        <TextView
-                            android:id="@+id/tvCallListening"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:gravity="center_vertical"
-                            android:text="     Call Listening"
-                            android:textSize="15sp"
-                            android:textColor="#000"
-                            android:drawableStart="@drawable/ic_baseline_call_24"/>
 
                     </LinearLayout>
 

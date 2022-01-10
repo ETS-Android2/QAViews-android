@@ -33,7 +33,7 @@ public class AuditFormActivity extends AppCompatActivity implements View.OnClick
 
 
 
-    AutoCompleteTextView atvObservation,atvObservation1;
+    AutoCompleteTextView atvObservation,atvObservation1,atvParameter;
     ImageView ivAllTheBest,ivBadLuck,ivAllTheBest1,ivBadLuck1;
     Activity mActivity;
 
@@ -49,6 +49,11 @@ public class AuditFormActivity extends AppCompatActivity implements View.OnClick
         mActivity = this;
 
 
+        atvParameter = findViewById(R.id.atvParameter);
+        String[] saParameter = {"Greeting and Authentication","Soft Skills","Etiquette","FCR","Farewell","Aftercall","AutoFail"};
+        ArrayAdapter adapterParameter = new ArrayAdapter(mActivity,
+                R.layout.support_simple_spinner_dropdown_item,saParameter);
+        atvParameter.setAdapter(adapterParameter);
 
 
         ivShowLessViewAuditCall = findViewById(R.id.ivShowLessViewAuditCall);
@@ -98,15 +103,15 @@ public class AuditFormActivity extends AppCompatActivity implements View.OnClick
 
         ivAllTheBest = findViewById(R.id.ivAllTheBest);
         ivBadLuck = findViewById(R.id.ivBadLuck);
-
+/*
         ivAllTheBest1 = findViewById(R.id.ivAllTheBest1);
-        ivBadLuck1 = findViewById(R.id.ivBadLuck1);
+        ivBadLuck1 = findViewById(R.id.ivBadLuck1);*/
 
         textInputLayoutFailType = findViewById(R.id.textInputLayoutFailType);
         textInputLayoutFailReason = findViewById(R.id.textInputLayoutFailReason);
-
+/*
         textInputLayoutFailType1 = findViewById(R.id.textInputLayoutFailType1);
-        textInputLayoutFailReason1 = findViewById(R.id.textInputLayoutFailReason1);
+        textInputLayoutFailReason1 = findViewById(R.id.textInputLayoutFailReason1);*/
 
         atvObservation = findViewById(R.id.atvObservation);
         String[] saObservation = {"Pass","Fail","N/A"};
@@ -140,7 +145,7 @@ public class AuditFormActivity extends AppCompatActivity implements View.OnClick
 
 
 
-        atvObservation1 = findViewById(R.id.atvObservation1);
+        /*atvObservation1 = findViewById(R.id.atvObservation1);
         String[] saObservation1 = {"Pass","Fail","N/A"};
         ArrayAdapter adapterObservation1 = new ArrayAdapter(mActivity,
                 R.layout.support_simple_spinner_dropdown_item,saObservation1);
@@ -168,7 +173,7 @@ public class AuditFormActivity extends AppCompatActivity implements View.OnClick
                     textInputLayoutFailReason1.setVisibility(View.GONE);
                 }
             }
-        });
+        });*/
 
 
 
