@@ -16,7 +16,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/linearLayoutHomeView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,8 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:background="#8ED549"
-                    android:gravity="center_vertical">
+                    android:background="#8ED549">
 
                     <TextView
                         android:layout_width="120dp"
@@ -58,6 +57,7 @@
 
                 </LinearLayout>
 
+<!--
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
 
                     </RelativeLayout>
 
-                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -161,9 +161,11 @@
                             android:layout_margin="10dp"
                             android:gravity="center">
                             <TextView
+                                android:id="@+id/tvFataScoreServer"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="18"
+                                android:text=""
+                                android:textStyle="bold"
                                 android:gravity="center"
                                 android:textSize="16sp"
                                 android:textColor="#000"/>
@@ -192,9 +194,11 @@
                             android:layout_margin="10dp"
                             android:gravity="center">
                             <TextView
+                                android:id="@+id/tvRebuttalScoreServer"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="25"
+                                android:text=""
+                                android:textStyle="bold"
                                 android:gravity="center"
                                 android:textSize="16sp"
                                 android:textColor="#000"/>
@@ -235,9 +239,11 @@
                             android:layout_margin="10dp"
                             android:gravity="center">
                             <TextView
+                                android:id="@+id/tvCoverageScoreServer"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="15"
+                                android:text=""
+                                android:textStyle="bold"
                                 android:gravity="center"
                                 android:textSize="16sp"
                                 android:textColor="#000"/>
@@ -476,7 +482,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayoutMenu"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -502,6 +508,7 @@
                             android:layout_height="match_parent">
 
                             <TextView
+                                android:id="@+id/tvUserName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Digvijay Singh"
@@ -510,6 +517,7 @@
                                 android:textColor="#000"/>
 
                             <TextView
+                                android:id="@+id/tvUserEmail"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Digvijay.singh@qdegrees.com"
@@ -560,10 +568,44 @@
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:gravity="center_vertical"
-                            android:text="     New Audit"
+                            android:text="     Audit Sheet"
                             android:textSize="15sp"
                             android:textColor="#000"
                             android:drawableStart="@drawable/ic_baseline_assignment_24_black"/>
+
+
+                        <TextView
+                            android:id="@+id/tvSubmittedList"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center_vertical"
+                            android:text="     Submitted"
+                            android:textSize="15sp"
+                            android:textColor="#000"
+                            android:drawableStart="@drawable/ic_baseline_subject_24"/>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center_vertical"
+                            android:text="     Save"
+                            android:textSize="15sp"
+                            android:textColor="#000"
+                            android:drawableStart="@drawable/ic_baseline_save_24"/>
+
+
+                        <TextView
+                            android:id="@+id/tvRebuttalRaiseList"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center_vertical"
+                            android:text="     Rebuttal Raise"
+                            android:textSize="15sp"
+                            android:textColor="#000"
+                            android:drawableStart="@drawable/ic_baseline_event_note_24"/>
+
+
 
                     </LinearLayout>
 

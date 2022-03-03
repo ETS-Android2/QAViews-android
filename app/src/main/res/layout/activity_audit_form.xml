@@ -117,6 +117,7 @@
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextClientName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
@@ -135,6 +136,7 @@
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextAgentName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
@@ -153,6 +155,7 @@
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextAuditDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
@@ -191,6 +194,7 @@
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextQAName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
@@ -212,7 +216,7 @@
             android:layout_marginBottom="10dp">
 
             <LinearLayout
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/linearLayoutLessViewAuditBasic"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -241,7 +245,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/linearLayoutMoreViewAuditBasic"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -271,7 +275,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/linearLayoutAuditBasicDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -382,6 +386,7 @@
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextSheetVersion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
@@ -403,7 +408,7 @@
             android:layout_marginBottom="10dp">
 
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/linearLayoutLessViewAuditQRC"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -432,7 +437,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/linearLayoutMoreViewAuditQRC"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -462,7 +467,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/linearLayoutAuditQRCDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -795,133 +800,12 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
+
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:text="Sub-Parameter"
-                    android:textColor="#888"
-                    android:textSize="13sp"/>
+                    android:id="@+id/recycleViewSubParameter"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:text="Used Correct Greeting"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="13sp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:hint="Observation"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_height="wrap_content">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/atvObservation"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textSize="13sp"
-                            android:inputType="none"
-                            android:textColor="#000"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <ImageView
-                        android:id="@+id/ivAllTheBest"
-                        android:visibility="gone"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/good_luck"
-                        android:layout_height="80dp"/>
-
-                    <ImageView
-                        android:id="@+id/ivBadLuck"
-                        android:visibility="gone"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/down"
-                        android:layout_height="80dp"/>
-
-                </LinearLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:visibility="gone"
-                    android:id="@+id/textInputLayoutFailType"
-                    android:layout_width="match_parent"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:hint="Failure Type"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_height="wrap_content">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/atvFailureType"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="13sp"
-                        android:inputType="none"
-                        android:textColor="#000"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:visibility="gone"
-                    android:id="@+id/textInputLayoutFailReason"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:hint="Failure Reason"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_height="wrap_content">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/atvFailureReason"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="13sp"
-                        android:inputType="none"
-                        android:textColor="#000"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:hint="Remark"
-                    android:layout_marginTop="10dp"
-                    android:background="#fff"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="15dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:textColor="#000"
-                        android:inputType="textMultiLine"/>
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <!--<View
                     android:layout_width="match_parent"
@@ -1099,6 +983,333 @@
             android:layout_marginBottom="10dp">
 
             <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/linearLayoutLessViewOverAll"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:background="#8ED549">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1.8"
+                    android:layout_height="match_parent"
+                    android:textColor="#363636"
+                    android:gravity="center_vertical"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="15dp"
+                    android:text="Overall Summary* (Required)" />
+
+                <ImageView
+                    android:id="@+id/ivShowLessViewOverall"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:paddingEnd="5dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_up_24"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/linearLayoutMoreViewOvelAll"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:background="#8ED549">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1.8"
+                    android:layout_height="match_parent"
+                    android:textColor="#363636"
+                    android:gravity="center_vertical"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="15dp"
+                    android:text="Overall Summary* (Required)" />
+
+                <ImageView
+                    android:id="@+id/ivShowMoreViewOverall"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:paddingEnd="5dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/linearLayoutOverAllDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#fff">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="Overall Call Summary"
+                    android:background="#fff"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="#000"
+                        android:inputType="textCapWords"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="Feedback To Agent"
+                    android:background="#fff"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="#000"
+                        android:inputType="textCapWords"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="Good or Bad Call ?:"
+                    android:background="#fff"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="#000"
+                        android:inputType="textCapWords"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/linearLayoutLessViewRCAType"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:background="#8ED549">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1.8"
+                    android:layout_height="match_parent"
+                    android:textColor="#363636"
+                    android:gravity="center_vertical"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="15dp"
+                    android:text="RCA Type* (Required)" />
+
+                <ImageView
+                    android:id="@+id/ivShowLessViewRCAType"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:paddingEnd="5dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_up_24"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/linearLayoutMoreViewRCAType"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:background="#8ED549">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1.8"
+                    android:layout_height="match_parent"
+                    android:textColor="#363636"
+                    android:gravity="center_vertical"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="15dp"
+                    android:text="RCA Type* (Required)" />
+
+                <ImageView
+                    android:id="@+id/ivShowMoreViewRCAType"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:paddingEnd="5dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/linearLayoutRCATypeDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#fff">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="RCA Type"
+                    android:background="#fff"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="#000"
+                        android:inputType="textCapWords"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="RCA Mode"
+                    android:background="#fff"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="#000"
+                        android:inputType="textCapWords"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="RCA 1"
+                    android:background="#fff"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="#000"
+                        android:inputType="textCapWords"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="RCA 2"
+                    android:background="#fff"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="#000"
+                        android:clickable="false"
+                        android:inputType="textCapWords"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="RCA 3"
+                    android:background="#fff"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="#000"
+                        android:clickable="false"
+                        android:inputType="textCapWords"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="Other Details"
+                    android:background="#fff"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="#000"
+                        android:inputType="textCapWords"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutMoreViewAuditScore"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:orientation="horizontal"
@@ -1117,11 +1328,96 @@
                     android:text="Score Result* (Required)" />
 
                 <ImageView
+                    android:id="@+id/ivShowMoreViewAuditScore"
                     android:layout_width="0dp"
                     android:layout_weight="0.2"
                     android:paddingEnd="5dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_baseline_keyboard_arrow_down_24"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/linearLayoutLessViewAuditScore"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:background="#8ED549">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1.8"
+                    android:layout_height="match_parent"
+                    android:textColor="#363636"
+                    android:gravity="center_vertical"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="15dp"
+                    android:text="Score Result* (Required)" />
+
+                <ImageView
+                    android:id="@+id/ivShowLessViewAuditScore"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:paddingEnd="5dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_up_24"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/linearLayoutAuditScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#fff">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1.5"
+                        android:layout_height="wrap_content"
+                        android:text="Behaviour"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="#888"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:layout_height="wrap_content"
+                        android:text="With Fatal"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:textColor="#888"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:layout_height="wrap_content"
+                        android:text="Without Fatal"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:textColor="#888"/>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycleViewAuditScore"
+                    android:layout_marginTop="10dp"/>
 
             </LinearLayout>
 

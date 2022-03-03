@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_filter"
+        android:id="@+id/action_filter_logout"
         android:orderInCategory="100"
-        android:title="Filter"
+        android:title="Logout"
         android:icon="@drawable/ic_baseline_filter_list_24"
-        app:showAsAction="always" />
+        />
 </menu>

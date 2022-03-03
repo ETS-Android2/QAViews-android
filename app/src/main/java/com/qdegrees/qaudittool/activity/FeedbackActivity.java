@@ -66,6 +66,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
     private Animation leftToRight,rightToLeft;
     RelativeLayout relativeLayoutNotification;
+    String sEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,8 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         progressDialog = new ProgressDialog(mActivity);
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCancelable(false);
+
+        sEmail = SharedPrefManager.getInstance(mActivity).getUserEmail();
 
         tvCallIDServer = findViewById(R.id.tvCallIDServer);
         tvProcessNameServer = findViewById(R.id.tvProcessNameServer);
@@ -132,7 +135,9 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
         if (view == tvAcceptFeedback) {
 
-            edtRebuttalRemark.setVisibility(View.GONE);
+            acceptedAuditNotification();
+
+            /*edtRebuttalRemark.setVisibility(View.GONE);
 
             progressDialog.show();
             new Handler().postDelayed(new Runnable() {
@@ -141,7 +146,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                     progressDialog.dismiss();
                     startActivity(new Intent(mActivity, DashboardRebuttalActivity.class));
                 }
-            },3000);
+            },3000);*/
         }
 
         if (view == tvPlanOfAction) {
@@ -168,6 +173,54 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
         }
 
+    }
+
+
+    private void acceptedAuditNotification() {
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Url.AUDIT_ACCEPT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("Response",response);
+                        try {
+                            progressDialog.dismiss();
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            String sMsg = jsonObject.getString("message");
+                            int  sStatus = jsonObject.getInt("status");
+
+
+                            if (sStatus != 200) {
+                                Toast.makeText(mActivity, sMsg, Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(mActivity, sMsg, Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(mActivity, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("agent_feedback_status", "1");
+                params.put("feedback_log_id", "1");
+
+                return params;
+            }
+        };
+
+        RequestHandler.getInstance(mActivity).addToRequestQueue(stringRequest);
     }
 
 
@@ -432,7 +485,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("email", "imaculada@mamamoney.co.za");
+                params.put("email", sEmail);
 
                 return params;
             }

@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/linearLayoutPlanOfAction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,8 +61,8 @@
                 android:id="@+id/linearLayoutOverAllPOA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -153,8 +153,7 @@
                 android:id="@+id/linearLayoutBehaviourWisePOA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -197,197 +196,13 @@
 
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleViewPlanOfAction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3"
-                            android:layout_margin="10dp">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="2"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <CheckBox
-                                    android:id="@+id/checkBox1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="60dp"
-                                    android:gravity="center_vertical"
-                                    android:text="CALL HANDLING SKILLS"
-                                    android:textSize="11sp"
-                                    android:textColor="#000"/>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="0.5"
-                                android:layout_height="60dp"
-                                android:text="0"
-                                android:gravity="center"
-                                android:textSize="12sp"
-                                android:textColor="#F44336"/>
-
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="0.5"
-                                android:layout_height="60dp">
-                                <ProgressBar
-                                    android:id="@+id/progressBar85"
-                                    android:indeterminateOnly="false"
-                                    android:progressDrawable="@drawable/circle_red"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:text="85%"
-                                    android:textColor="#000"
-                                    android:textSize="11sp" />
-
-                            </RelativeLayout>
-
-                        </LinearLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:visibility="gone"
-                            android:id="@+id/remarkLayout1"
-                            android:layout_width="match_parent"
-                            android:hint="@string/write_here"
-                            app:endIconMode="clear_text"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="15dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_height="wrap_content">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="13sp"
-                                android:textColor="#000"
-                                android:inputType="textMultiLine"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3"
-                            android:layout_margin="10dp">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="2"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <CheckBox
-                                    android:id="@+id/checkBox2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="60dp"
-                                    android:gravity="center_vertical"
-                                    android:text="CUSTOMER SERVICE ESSENTIALS"
-                                    android:textSize="11sp"
-                                    android:textColor="#000"/>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="0.5"
-                                android:layout_height="60dp"
-                                android:text="0"
-                                android:gravity="center"
-                                android:textSize="12sp"
-                                android:textColor="#F44336"/>
-
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="0.5"
-                                android:layout_height="60dp">
-
-                                <ProgressBar
-                                    android:id="@+id/ProgressBar855"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:indeterminateOnly="false"
-                                    android:progressDrawable="@drawable/circle_red" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:text="85%"
-                                    android:textColor="#000"
-                                    android:textSize="11sp" />
-
-                            </RelativeLayout>
-
-                        </LinearLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:visibility="gone"
-                            android:id="@+id/remarkLayout2"
-                            android:layout_width="match_parent"
-                            android:hint="@string/write_here"
-                            app:endIconMode="clear_text"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="15dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_height="wrap_content">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="13sp"
-                                android:textColor="#000"
-                                android:inputType="textMultiLine"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
+                <!--<androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -422,19 +237,7 @@
                             android:src="@drawable/ic_baseline_mic_24"/>
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <Button
-                    android:id="@+id/btnSendFeedback"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/save"
-                    android:background="#A7F1C6"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:textSize="13sp"/>
+                </androidx.cardview.widget.CardView>-->
 
             </LinearLayout>
 
@@ -517,302 +320,11 @@
 
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleViewRebuttalRaise"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3"
-                            android:layout_margin="10dp">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="2"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <CheckBox
-                                    android:id="@+id/checkBox13"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="60dp"
-                                    android:gravity="center_vertical"
-                                    android:text="CALL HANDLING SKILLS"
-                                    android:textSize="11sp"
-                                    android:textColor="#000"/>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="0.5"
-                                android:layout_height="60dp"
-                                android:text="0"
-                                android:gravity="center"
-                                android:textSize="12sp"
-                                android:textColor="#F44336"/>
-
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="0.5"
-                                android:layout_height="60dp">
-                                <ProgressBar
-                                    android:id="@+id/progressBar8533"
-                                    android:indeterminateOnly="false"
-                                    android:progressDrawable="@drawable/circle_red"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:text="85%"
-                                    android:textColor="#000"
-                                    android:textSize="11sp" />
-
-                            </RelativeLayout>
-
-                        </LinearLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:visibility="gone"
-                            android:id="@+id/remarkLayout13"
-                            android:layout_width="match_parent"
-                            android:hint="@string/write_here_rebuttal"
-                            app:endIconMode="clear_text"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_height="wrap_content">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="13sp"
-                                android:textColor="#000"
-                                android:inputType="textMultiLine"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <androidx.cardview.widget.CardView
-                            android:visibility="gone"
-                            android:id="@+id/cvRecordAudio1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="10dp"
-                            app:cardElevation="5dp">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:layout_margin="10dp"
-                                android:gravity="center">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Record Rebuttal Action"
-                                    android:textSize="12sp"
-                                    android:textColor="#000"
-                                    android:textStyle="bold"/>
-
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:background="#888"
-                                    android:layout_marginTop="10dp"/>
-
-
-                                <ImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginTop="15dp"
-                                    android:layout_marginBottom="15dp"
-                                    android:src="@drawable/ic_baseline_mic_24"/>
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <Button
-                            android:id="@+id/btnSave1"
-                            android:visibility="gone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/save"
-                            android:background="#A7F1C6"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginBottom="15dp"
-                            android:textSize="13sp"/>
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3"
-                            android:layout_margin="10dp">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="2"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <CheckBox
-                                    android:id="@+id/checkBox23"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="60dp"
-                                    android:gravity="center_vertical"
-                                    android:text="CUSTOMER SERVICE ESSENTIALS"
-                                    android:textSize="11sp"
-                                    android:textColor="#000"/>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="0.5"
-                                android:layout_height="60dp"
-                                android:text="0"
-                                android:gravity="center"
-                                android:textSize="12sp"
-                                android:textColor="#F44336"/>
-
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="0.5"
-                                android:layout_height="60dp">
-
-                                <ProgressBar
-                                    android:id="@+id/ProgressBar8553"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:indeterminateOnly="false"
-                                    android:progressDrawable="@drawable/circle_red" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:text="85%"
-                                    android:textColor="#000"
-                                    android:textSize="11sp" />
-
-                            </RelativeLayout>
-
-                        </LinearLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:visibility="gone"
-                            android:id="@+id/remarkLayout23"
-                            android:layout_width="match_parent"
-                            android:hint="@string/write_here_rebuttal"
-                            app:endIconMode="clear_text"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_height="wrap_content">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="13sp"
-                                android:textColor="#000"
-                                android:inputType="textMultiLine"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <androidx.cardview.widget.CardView
-                            android:visibility="gone"
-                            android:id="@+id/cvRecordAudio11"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="10dp"
-                            app:cardElevation="5dp">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:layout_margin="10dp"
-                                android:gravity="center">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Record Rebuttal Action"
-                                    android:textSize="12sp"
-                                    android:textColor="#000"
-                                    android:textStyle="bold"/>
-
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:background="#888"
-                                    android:layout_marginTop="10dp"/>
-
-
-                                <ImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginTop="15dp"
-                                    android:layout_marginBottom="15dp"
-                                    android:src="@drawable/ic_baseline_mic_24"/>
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <Button
-                            android:id="@+id/btnSave11"
-                            android:visibility="gone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/save"
-                            android:background="#A7F1C6"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginBottom="15dp"
-                            android:textSize="13sp"/>
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                    />
 
             </LinearLayout>
 

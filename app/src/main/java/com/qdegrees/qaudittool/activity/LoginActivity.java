@@ -47,32 +47,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().hide();
         mActivity = this;
 
-        /*sSaveUserRole = SharedPrefManager.getInstance(mActivity).getUserRole();
+        sSaveUserRole = SharedPrefManager.getInstance(mActivity).getUserRole();
 
         if (sSaveUserRole.equals("partner-admin")) {
-            startActivity(new Intent(mActivity, FeedbackActivity.class));
+            startActivity(new Intent(mActivity, FeedbackNotificationActivity.class));
             finish();
         }else if (sSaveUserRole.equals("qa")) {
             startActivity(new Intent(mActivity, MainMenuActivity.class));
             finish();
-        }else {
+        }else if (!sSaveUserRole.equals("null")) {
             startActivity(new Intent(mActivity, AudioFilterActivity.class));
             finish();
-        }*/
+        }
 
-
-        /*if (SharedPrefManager.getInstance(mActivity).isLoggedIn()) {
-            if (SharedPrefManager.getInstance(mActivity).getUserEmail().equals("sb@qdegrees.com")) {
-                startActivity(new Intent(mActivity, FeedbackActivity.class));
-                finish();
-            }else if (SharedPrefManager.getInstance(mActivity).getUserEmail().equals("Digvijay.singh@qdegrees.com")) {
-                startActivity(new Intent(mActivity, MainMenuActivity.class));
-                finish();
-            }else {
-                startActivity(new Intent(mActivity, AudioFilterActivity.class));
-                finish();
-            }
-        }*/
 
         progressDialog = new ProgressDialog(mActivity);
         progressDialog.setCancelable(false);
@@ -83,13 +70,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
-
-        /*findViewById(R.id.btnLogin).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mActivity, MainMenuActivity.class));
-            }
-        });*/
 
     }
 
@@ -106,21 +86,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(mActivity, "Please Fill Valid Email Address", Toast.LENGTH_SHORT).show();
             }else if (sPassword.isEmpty()) {
                 Toast.makeText(mActivity, "Please Fill Password", Toast.LENGTH_SHORT).show();
-            }/*else {
-
-                if(sEmail.equals("Digvijay.singh@qdegrees.com")) {
-
-                    String sName = "Digvijay Singh";
-                    String sAuthKey = "authKey";
-                    String sEmail = "Digvijay.singh@qdegrees.com";
-                    String sUserId = "1621";
-
-                    //SharedPrefManager.getInstance(mActivity).userLogin(sUserId,sName,sEmail,sAuthKey);
-
-                    startActivity(new Intent(mActivity, MainMenuActivity.class));
-                    finish();
-                }*/else {
-                    userLogin();
+            }else {
+                userLogin();
             }
 
         }
@@ -158,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 SharedPrefManager.getInstance(mActivity).userLogin(sUserId,sName,sEmail,sAuthKey,sUserRole);
 
                                 if (sUserRole.equals("partner-admin")) {
-                                    startActivity(new Intent(mActivity, FeedbackActivity.class));
+                                    startActivity(new Intent(mActivity, FeedbackNotificationActivity.class));
                                     finish();
                                 }else if (sUserRole.equals("qa")) {
                                     startActivity(new Intent(mActivity, MainMenuActivity.class));

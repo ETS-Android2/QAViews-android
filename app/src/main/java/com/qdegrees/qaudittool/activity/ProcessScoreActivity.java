@@ -320,12 +320,14 @@ public class ProcessScoreActivity extends AppCompatActivity implements View.OnCl
         if (v == tvPlanOfAction1) {
             Intent intent = new Intent(mActivity, PlanOfActionActivity.class);
             intent.putExtra("valueCheck","POA");
+            intent.putExtra("sAuditId",sAuditId);
             startActivity(intent);
         }
 
         if (v == tvRaiseRebuttal1){
             Intent intent = new Intent(mActivity, PlanOfActionActivity.class);
             intent.putExtra("valueCheck","Rebuttal");
+            intent.putExtra("sAuditId",sAuditId);
             startActivity(intent);
         }
 

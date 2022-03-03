@@ -12,11 +12,28 @@ public class Url {
 
     public static final String FEEDBACK_NOTIFICATION = ROOT_URL + "notification_feedback";
     public static final String PARAMETER_WISE_SCORE = ROOT_URL + "parameter_wise_details";
+    public static final String RAISE_REBUTTAL = ROOT_URL + "Rebuttal";
+
+
+
+
+    // Agent Feedback
+    public static final String AUDIT_ACCEPT = ROOT_URL + "accepted";
+
+
+
+
+
+
+    // API for Auditor
+    public static final String AUDITOR_DASHBOARD = ROOT_URL + "auditor_dashboard";
+    public static final String AUDITOR_DASHBOARD_PROCESS_NAME = ROOT_URL + "auditor_process_list";
+    public static final String AUDITOR_AGENT_NAME = ROOT_URL + "audit_page_render_sheet";
+    public static final String AUDITOR_SUBMITTED_AUDIT_LIST = ROOT_URL + "audited_main_pool";
 
 
 
     // for Stock Management
-    public static final String SINGLE_DEVICE_UPLOAD = ROOT_URL + "singleStockCreate";
     public static final String IN_STOCK_URL = ROOT_URL + "inStockDevice";
     public static final String ALL_IMEI_NUMBER = ROOT_URL + "allDevices";
     public static final String OUT_STOCK_URL = ROOT_URL + "outStockDevice";

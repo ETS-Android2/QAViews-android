@@ -4,12 +4,18 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,9 +23,27 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.textfield.TextInputLayout;
 import com.qdegrees.qaudittool.R;
+import com.qdegrees.qaudittool.adapter.ParameterWiseScoreAdapter;
+import com.qdegrees.qaudittool.adapter.PlanOfActionAdapter;
+import com.qdegrees.qaudittool.adapter.RaiseRebuttalAdapter;
+import com.qdegrees.qaudittool.common.RequestHandler;
+import com.qdegrees.qaudittool.common.Url;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlanOfActionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,14 +51,14 @@ public class PlanOfActionActivity extends AppCompatActivity implements View.OnCl
 
     LinearLayout linearLayoutOverAllPOA,linearLayoutBehaviourWisePOA,
             linearLayoutPlanOfAction,linearLayoutRaiseRebuttal;
-    CheckBox checkBox1,checkBox2,checkBox23,checkBox13;
-    TextInputLayout remarkLayout1,remarkLayout2,remarkLayout23,remarkLayout13;
-    ProgressBar progressBar85,ProgressBar855,ProgressBar8553,progressBar8533;
-    String sCheckValue;
-    Button btnSave1,btnSave11;
-    CardView cvRecordAudio1,cvRecordAudio11;
+    String sCheckValue,sAuditId;
 
     Activity mActivity;
+
+    RecyclerView recycleViewPlanOfAction,recycleViewRebuttalRaise;
+    ProgressDialog progressDialog;
+    String[] saParameterName,saSubParameterName,saScoreWithFatalPer,saScore,
+                saParameterId,saSubParameterId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +68,11 @@ public class PlanOfActionActivity extends AppCompatActivity implements View.OnCl
         mActivity = this;
 
         sCheckValue = getIntent().getStringExtra("valueCheck");
+        sAuditId = getIntent().getStringExtra("sAuditId");
 
-        btnSave1 = findViewById(R.id.btnSave1);
-        cvRecordAudio1 = findViewById(R.id.cvRecordAudio1);
-
-        btnSave11 = findViewById(R.id.btnSave11);
-        cvRecordAudio11 = findViewById(R.id.cvRecordAudio11);
+        progressDialog = new ProgressDialog(mActivity);
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.setCancelable(false);
 
         linearLayoutOverAllPOA = findViewById(R.id.linearLayoutOverAllPOA);
 
@@ -64,39 +87,6 @@ public class PlanOfActionActivity extends AppCompatActivity implements View.OnCl
         tvBehaviourWise = findViewById(R.id.tvBehaviourWise);
         tvBehaviourWise.setOnClickListener(this::onClick);
 
-        progressBar85 = findViewById(R.id.progressBar85);
-        progressBar85.setProgress(85);
-
-        ProgressBar855 = findViewById(R.id.ProgressBar855);
-        ProgressBar855.setProgress(85);
-
-        checkBox1 = findViewById(R.id.checkBox1);
-        remarkLayout1 = findViewById(R.id.remarkLayout1);
-
-        checkBox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (checkBox1.isChecked()) {
-                    remarkLayout1.setVisibility(View.VISIBLE);
-                }else {
-                    remarkLayout1.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        remarkLayout2 = findViewById(R.id.remarkLayout2);
-        checkBox2 = findViewById(R.id.checkBox2);
-        checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (checkBox2.isChecked()) {
-                    remarkLayout2.setVisibility(View.VISIBLE);
-                }else {
-                    remarkLayout2.setVisibility(View.GONE);
-                }
-            }
-        });
-
         if (sCheckValue.equals("POA")) {
             setTitle("Plan Of Action");
             linearLayoutPlanOfAction.setVisibility(View.VISIBLE);
@@ -107,45 +97,15 @@ public class PlanOfActionActivity extends AppCompatActivity implements View.OnCl
             linearLayoutRaiseRebuttal.setVisibility(View.VISIBLE);
         }
 
-        ProgressBar8553 = findViewById(R.id.ProgressBar8553);
-        ProgressBar8553.setProgress(85);
-        remarkLayout23 = findViewById(R.id.remarkLayout23);
-        checkBox23 = findViewById(R.id.checkBox23);
-        checkBox23.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (checkBox23.isChecked()) {
-                    remarkLayout23.setVisibility(View.VISIBLE);
-                    btnSave11.setVisibility(View.VISIBLE);
-                    cvRecordAudio11.setVisibility(View.VISIBLE);
-                }else {
-                    remarkLayout23.setVisibility(View.GONE);
-                    btnSave11.setVisibility(View.GONE);
-                    cvRecordAudio11.setVisibility(View.GONE);
-                }
-            }
-        });
+        recycleViewPlanOfAction = findViewById(R.id.recycleViewPlanOfAction);
+        recycleViewPlanOfAction.setHasFixedSize(true);
+        recycleViewPlanOfAction.setLayoutManager(new LinearLayoutManager(mActivity));
 
+        recycleViewRebuttalRaise = findViewById(R.id.recycleViewRebuttalRaise);
+        recycleViewRebuttalRaise.setHasFixedSize(true);
+        recycleViewRebuttalRaise.setLayoutManager(new LinearLayoutManager(mActivity));
 
-        remarkLayout13 = findViewById(R.id.remarkLayout13);
-        progressBar8533 = findViewById(R.id.progressBar8533);
-        progressBar8533.setProgress(85);
-
-        checkBox13 = findViewById(R.id.checkBox13);
-        checkBox13.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (checkBox13.isChecked()) {
-                    remarkLayout13.setVisibility(View.VISIBLE);
-                    btnSave1.setVisibility(View.VISIBLE);
-                    cvRecordAudio1.setVisibility(View.VISIBLE);
-                }else {
-                    remarkLayout13.setVisibility(View.GONE);
-                    btnSave1.setVisibility(View.GONE);
-                    cvRecordAudio1.setVisibility(View.GONE);
-                }
-            }
-        });
+        auditScoreParameterWise();
 
     }
 
@@ -202,4 +162,102 @@ public class PlanOfActionActivity extends AppCompatActivity implements View.OnCl
         }
 
     }
+
+    private void auditScoreParameterWise() {
+
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Url.PARAMETER_WISE_SCORE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("Response",response);
+                        try {
+                            progressDialog.dismiss();
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            String sMsg = jsonObject.getString("message");
+                            int  sStatus = jsonObject.getInt("status");
+
+                            Log.e("serverMessage",sMsg);
+
+                            if (sStatus != 200) {
+
+                                Toast.makeText(mActivity, sMsg, Toast.LENGTH_SHORT).show();
+                            }else {
+
+
+                                JSONArray array1 = jsonObject.getJSONArray("data");
+
+                                if (array1.length() == 0) {
+                                    startActivity(new Intent(mActivity, DashboardRebuttalActivity.class));
+                                }else {
+
+                                    saParameterName = new String[array1.length()];
+                                    saSubParameterName = new String[array1.length()];
+                                    saScoreWithFatalPer = new String[array1.length()];
+                                    saScore = new String[array1.length()];
+
+                                    saParameterId = new String[array1.length()];
+                                    saSubParameterId = new String[array1.length()];
+
+
+                                    for (int i=0; i<array1.length(); i++) {
+                                        JSONObject data = array1.getJSONObject(i);
+
+                                        saParameterName[i] = data.getString("parameter");
+                                        saSubParameterName[i] = data.getString("sub_parameter");
+                                        saScoreWithFatalPer[i] = data.getString("with_fatal_score_per");
+                                        saScore[i] = data.getString("score");
+
+                                        saParameterId[i] = data.getString("paramter_id");
+                                        saSubParameterId[i] = data.getString("subparameter_id");
+
+                                    }
+
+                                    recycleViewPlanOfAction.setAdapter(new PlanOfActionAdapter(
+                                            mActivity, saParameterName, saSubParameterName,
+                                            saScoreWithFatalPer, saScore, sAuditId,
+                                            saParameterId,saSubParameterId
+                                    ));
+
+                                    recycleViewRebuttalRaise.setAdapter(new RaiseRebuttalAdapter(
+                                            mActivity, saParameterName, saSubParameterName,
+                                            saScoreWithFatalPer, saScore, sAuditId,
+                                            saParameterId,saSubParameterId
+                                    ));
+
+
+
+                                }
+
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(mActivity, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("audit_id", sAuditId);
+
+                return params;
+            }
+        };
+
+        RequestHandler.getInstance(mActivity).addToRequestQueue(stringRequest);
+
+
+    }
+
 }

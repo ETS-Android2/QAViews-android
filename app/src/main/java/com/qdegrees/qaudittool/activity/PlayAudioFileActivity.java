@@ -398,8 +398,7 @@ public class PlayAudioFileActivity extends AppCompatActivity implements View.OnC
     }
 
 
-
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.filter_menu,menu);
@@ -409,62 +408,28 @@ public class PlayAudioFileActivity extends AppCompatActivity implements View.OnC
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_filter:
+            case R.id.action_filter_logout:
+                AlertDialog.Builder alert = new AlertDialog.Builder(mActivity);
+                alert.setMessage("Are you sure?")
+                        .setPositiveButton("Logout", new DialogInterface.OnClickListener()                 {
 
-                getFilterOption();
+                            public void onClick(DialogInterface dialog, int which) {
 
-                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this,android.R.style.Theme_Material_Light_NoActionBar_Fullscreen);
-                View mView = LayoutInflater.from(this).inflate(R.layout.filter_alert_view, null);
-                mBuilder.setCancelable(false);
-                mBuilder.setView(mView);
-                final AlertDialog dialog = mBuilder.create();
+                                Intent intent = new Intent(mActivity, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                SharedPrefManager.getInstance(mActivity).logout();
+                                finish();
 
-                atvProcessType = mView.findViewById(R.id.atvProcessType);
+                            }
+                        }).setNegativeButton("Cancel", null);
 
-                atvLocation = mView.findViewById(R.id.atvLocation);
+                AlertDialog alert1 = alert.create();
+                alert1.show();
+                return true;
 
-                atvLOB = mView.findViewById(R.id.atvLOB);
-
-                atvDisposition = mView.findViewById(R.id.atvDisposition);
-
-                atvcampaign_name = mView.findViewById(R.id.atvcampaign_name);
-
-
-                // for Close Alert Dailog
-                TextView tvCloseFilterView = mView.findViewById(R.id.tvCloseFilterView);
-                tvCloseFilterView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
-
-                // For apply
-                Button btnApplyFilter = mView.findViewById(R.id.btnApplyFilter);
-                btnApplyFilter.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                    sAddress = edtAddress.getText().toString();
-                    sArea = edtArea.getText().toString();
-                    sCity = edtCity.getText().toString();
-                    sNumber = edtNumber.getText().toString();
-                    swhatsApp = edtWhatsApp.getText().toString();
-                    sFacebook = edtFacebook.getText().toString();
-                    sTwitter = edtTwitter.getText().toString();
-                    sInstagram = edtInsta.getText().toString();
-                    sAbout = edtAbout.getText().toString();
-                    sService = edtService.getText().toString();
-
-
-                        dialog.dismiss();
-
-                    }
-                });
-
-                dialog.show();
-                dialog.setCancelable(true);
-
+            case R.id.action_notification:
+                startActivity(new Intent(mActivity, NotificationActivity.class));
                 return true;
         }
 
@@ -472,127 +437,5 @@ public class PlayAudioFileActivity extends AppCompatActivity implements View.OnC
     }
 
 
-    private void getFilterOption() {
-
-        progressDialog.show();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Url.FILTER_LIST,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("Response",response);
-                        try {
-                            progressDialog.dismiss();
-                            JSONObject jsonObject = new JSONObject(response);
-
-                            String sMsg = jsonObject.getString("message");
-                            int  sStatus = jsonObject.getInt("status");
-
-                            Log.e("serverMessage",sMsg);
-
-                            if (sStatus != 200) {
-                                Toast.makeText(mActivity, sMsg, Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(mActivity, sMsg, Toast.LENGTH_SHORT).show();
-
-
-                                JSONObject dataJsonDataObject = jsonObject.getJSONObject("data");
-
-
-                                JSONArray locationJsonArray = dataJsonDataObject.getJSONArray("location");
-
-                                saLocation = new String[locationJsonArray.length()];
-
-                                for (int i=0; i < locationJsonArray.length(); i++) {
-                                    JSONObject locationData = locationJsonArray.getJSONObject(i);
-
-                                    saLocation[i] = locationData.getString("location");
-
-                                    ArrayAdapter adapterLocation = new ArrayAdapter(PlayAudioFileActivity.this,
-                                            R.layout.support_simple_spinner_dropdown_item,saLocation);
-                                    atvLocation.setAdapter(adapterLocation);
-
-                                }
-
-                                JSONArray processJsonArray = dataJsonDataObject.getJSONArray("process");
-
-                                saProcessName = new String[processJsonArray.length()];
-
-                                for (int i=0; i < processJsonArray.length(); i++) {
-                                    JSONObject processData = processJsonArray.getJSONObject(i);
-
-                                    saProcessName[i] = processData.getString("name");
-
-                                    ArrayAdapter adapterLocation = new ArrayAdapter(PlayAudioFileActivity.this,
-                                            R.layout.support_simple_spinner_dropdown_item,saProcessName);
-                                    atvProcessType.setAdapter(adapterLocation);
-
-                                }
-
-                                JSONArray lobJsonArray = dataJsonDataObject.getJSONArray("lob");
-                                saLobName = new String[lobJsonArray.length()];
-                                for (int i=0; i < lobJsonArray.length(); i++) {
-                                    JSONObject lobData = lobJsonArray.getJSONObject(i);
-
-                                    saLobName[i] = lobData.getString("lob");
-
-                                    ArrayAdapter adapterLocation = new ArrayAdapter(PlayAudioFileActivity.this,
-                                            R.layout.support_simple_spinner_dropdown_item,saLobName);
-                                    atvLOB.setAdapter(adapterLocation);
-
-                                }
-
-                                JSONArray dispositionJsonArray = dataJsonDataObject.getJSONArray("disposition");
-                                saDispositionName = new String[dispositionJsonArray.length()];
-                                for (int i=0; i < dispositionJsonArray.length(); i++) {
-                                    JSONObject dispositionData = dispositionJsonArray.getJSONObject(i);
-
-                                    saDispositionName[i] = dispositionData.getString("disposition");
-
-                                    ArrayAdapter adapterLocation = new ArrayAdapter(PlayAudioFileActivity.this,
-                                            R.layout.support_simple_spinner_dropdown_item,saDispositionName);
-                                    atvDisposition.setAdapter(adapterLocation);
-
-                                }
-
-                                JSONArray campaign_nameJsonArray = dataJsonDataObject.getJSONArray("campaign_name");
-                                saCampaign_name = new String[campaign_nameJsonArray.length()];
-                                for (int i=0; i < campaign_nameJsonArray.length(); i++) {
-                                    JSONObject campaign_nameData = campaign_nameJsonArray.getJSONObject(i);
-
-                                    saCampaign_name[i] = campaign_nameData.getString("campaign_name");
-
-                                    ArrayAdapter adapterLocation = new ArrayAdapter(PlayAudioFileActivity.this,
-                                            R.layout.support_simple_spinner_dropdown_item,saCampaign_name);
-                                    atvcampaign_name.setAdapter(adapterLocation);
-
-                                }
-
-                            }
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(mActivity, error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                //params.put("client_id", "1");
-
-                return params;
-            }
-        };
-
-        RequestHandler.getInstance(mActivity).addToRequestQueue(stringRequest);
-
-    }*/
 
 }
