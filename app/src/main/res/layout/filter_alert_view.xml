@@ -56,6 +56,7 @@
         android:textColor="#888"/>
 
     <CheckBox
+        android:id="@+id/checkboxAllSend"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -66,6 +67,7 @@
         android:text="  All"/>
 
     <CheckBox
+        android:id="@+id/checkboxTLSend"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
@@ -76,6 +78,7 @@
         android:text="  Team Leader"/>
 
     <CheckBox
+        android:id="@+id/checkboxQASend"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
@@ -86,6 +89,7 @@
         android:text="  QA"/>
 
     <CheckBox
+        android:id="@+id/checkboxPartnerSend"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
@@ -96,6 +100,7 @@
         android:text="  Partner"/>
 
     <CheckBox
+        android:id="@+id/checkboxClientSend"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
@@ -116,7 +121,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/edtEmailAddress"
+            android:id="@+id/edtEmailAddressSend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="13sp"
@@ -137,7 +142,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/atvcampaign_name"
+            android:id="@+id/edtRemarkSendFeedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="13sp"
@@ -148,6 +153,7 @@
 
 
     <Button
+        android:id="@+id/btnSaveRemarkOnFile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"

@@ -1,15 +1,20 @@
 package com.qdegrees.qaudittool.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
@@ -111,15 +116,19 @@ public class AudioFileListAdapter extends RecyclerView.Adapter<AudioFileListAdap
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
 
-                /*atvProcessType = mView.findViewById(R.id.atvProcessType);
+                ProgressDialog progressDialog;
+                progressDialog = new ProgressDialog(context);
+                progressDialog.setMessage("Please Wait...");
+                progressDialog.setCancelable(false);
 
-                atvLocation = mView.findViewById(R.id.atvLocation);
+                CheckBox checkboxAllSend = mView.findViewById(R.id.checkboxAllSend);
+                CheckBox checkboxTLSend = mView.findViewById(R.id.checkboxTLSend);
+                CheckBox checkboxQASend = mView.findViewById(R.id.checkboxQASend);
+                CheckBox checkboxPartnerSend = mView.findViewById(R.id.checkboxPartnerSend);
+                CheckBox checkboxClientSend = mView.findViewById(R.id.checkboxClientSend);
 
-                atvLOB = mView.findViewById(R.id.atvLOB);
-
-                atvDisposition = mView.findViewById(R.id.atvDisposition);
-
-                atvcampaign_name = mView.findViewById(R.id.atvcampaign_name);*/
+                EditText edtEmailAddressSend = mView.findViewById(R.id.edtEmailAddressSend);
+                EditText edtRemarkSendFeedback = mView.findViewById(R.id.edtRemarkSendFeedback);
 
 
                 // for Close Alert Dailog
@@ -128,6 +137,35 @@ public class AudioFileListAdapter extends RecyclerView.Adapter<AudioFileListAdap
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
+                    }
+                });
+
+                // Submit the remark of Audio File
+                Button btnSaveRemarkOnFile = mView.findViewById(R.id.btnSaveRemarkOnFile);
+                btnSaveRemarkOnFile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String sEmailFeedback = edtEmailAddressSend.getText().toString();
+                        String sRemarkFeedback = edtRemarkSendFeedback.getText().toString();
+
+                        if (!checkboxAllSend.isChecked() & !checkboxTLSend.isChecked() & !checkboxQASend.isChecked() &
+                                !checkboxPartnerSend.isChecked() & !checkboxClientSend.isChecked() ) {
+                            Toast.makeText(context, "Please Select Any One Sender!!", Toast.LENGTH_SHORT).show();
+                        }else if (sRemarkFeedback.isEmpty()) {
+                            Toast.makeText(context, "Please Fill Remark for Call Audio", Toast.LENGTH_SHORT).show();
+                        }else {
+                            progressDialog.show();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "Remark Submitted", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                    dialog.dismiss();
+
+                                }
+                            },5000);
+                        }
+
                     }
                 });
 

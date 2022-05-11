@@ -2,7 +2,8 @@ package com.qdegrees.qaudittool.common;
 
 public class Url {
 
-    private static final String ROOT_URL = "https://mamamoney.qaviews.com/api/";
+    //private static final String ROOT_URL = "https://mamamoney.qaviews.com/api/";
+    private static final String ROOT_URL = "https://preqmtool.qdegrees.com/api/";
 
     public static final String LOGIN_USER = ROOT_URL + "login";
     public static final String AUDIO_FILE_LIST = ROOT_URL + "recording_list";
